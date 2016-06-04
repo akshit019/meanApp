@@ -1,0 +1,23 @@
+<div class="container" style="margin-top: 5%" ng-controller="LoginController">
+	<div class="row">
+		<h4 class="center">Login with your credentials</h4>
+	</div>
+	<div class="row">
+		<form class="s12" ng-submit="doLogin()">
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="username" type="text" class="validate" ng-model="loginData.username">
+					<label for="username">Username</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="password" type="password" class="validate" ng-model="loginData.password">
+					<label for="password">Password</label>
+				</div>
+			</div>
+			<button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="action">Submit<i class="material-icons right">send</i></button><span style="padding-left: 5%;"><a href="#/register">Not a user? Register here</a></span>
+		</form>
+		<div class="row"></div>
+	</div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container" style="margin-top: 5%" ng-controller="RegisterController">
+	<div class="row">
+		<h4 class="center">Register here!</h4>
+	</div>
+	<div class="row">
+		<form class="s12" ng-submit="doRegister()">
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="first_name" type="text" class="validate" ng-model="registration.firstname">
+					<label for="first_name">First Name</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="last_name" type="text" class="validate" ng-model="registration.lastname">
+					<label for="last_name">Last Name</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="username" type="text" class="validate" ng-model="registration.username">
+					<label for="username">Username</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="password" type="password" class="validate" ng-model="registration.password">
+					<label for="password">Password</label>
+				</div>
+			</div>
+			<button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+		</form>
+		<div class="row"></div>
+	</div>
+</div>
