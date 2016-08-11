@@ -1,5 +1,5 @@
 module.exports = {
-	'secretKey': '12345-67890-09876-54321',
+	'secretKey': '12345-67890-09876-54321', //to encrypt our token
 	'mongoUrl': 'mongodb://localhost:27017/test1',
 	//OAuth facebook authentication
 	'facebook': {

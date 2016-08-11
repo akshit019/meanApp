@@ -9,8 +9,10 @@ var Schema = mongoose.Schema;
 var User = new Schema({
 	username: String, //by default there in Schema
 	password: String, //by default there in Schema
+	
 	OauthId: String, //OAuth facebook authentication
 	OauthToken: String, //OAuth facebook authentication
+	
 	firstname: {
 		type: String,
 		default: '' //empty by default

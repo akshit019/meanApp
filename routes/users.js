@@ -7,10 +7,10 @@ var Verify = require('./verify');
 /* GET users listing. */
 router.get('/', Verify.verifyOrdinaryUser, function(req, res, next) {
   
-	if(req.decoded._doc.admin){
-		User.find({}, function(err, dish){
+	if(req.decoded){
+		User.find({}, function(err, user){
 			if(err) throw err;
-			res.json(dish);
+			res.json(user);
 		});
 	}
 	else{
@@ -19,7 +19,6 @@ router.get('/', Verify.verifyOrdinaryUser, function(req, res, next) {
 	}
 
 });
-
 
 //registering a user
 router.post('/register', function(req, res){
@@ -38,6 +37,27 @@ router.post('/register', function(req, res){
 
 		user.save(function(err, user) {
 			passport.authenticate('local')(req, res, function(){
+
+				// send mail on registration
+				// ===================================================
+
+				var api_key = 'key-c40b61eefbf3f79297fa7ceb459228ba';
+				var domain = 'sandbox77e497343a4d42e295cd30d85908a143.mailgun.org';
+				var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+				 
+				var data = {
+				  from: 'noreply<noreply@meanapp.com>',
+				  to: req.body.username,
+				  subject: 'Registration Successful',
+				  text: 'Testing some Mailgun awesomness!'
+				};
+				 
+				mailgun.messages().send(data, function (error, body) {
+				  console.log(body);
+				});
+
+
+				//console.log("Hi there" + req.body.username);
 				return res.status(200).json({status: 'Registration Successful'});
 			});
 		});

@@ -21,22 +21,22 @@ angular.module('meanApp')
         getObject: function (key, defaultValue) {
             return JSON.parse($window.localStorage[key] || defaultValue);
         }
-    }
+    };
 }])
 
 //AuthFactory for user registration and authentication
-.factory('AuthFactory', ['$resource', '$http', '$localStorage', '$rootScope', '$window', 'baseURL', function($resource, $http, $localStorage, $rootScope, $window, baseURL, ngDialog){
+.factory('AuthFactory', ['$resource', '$location', '$http', '$localStorage', '$rootScope', '$window', 'baseURL', function($resource, $location, $http, $localStorage, $rootScope, $window, baseURL){
     
     var authFac = {};
     var TOKEN_KEY = 'Token';
     var isAuthenticated = false;
     var username = '';
-    var authToken = undefined;
+    var authToken;
     
 
   function loadUserCredentials() {
     var credentials = $localStorage.getObject(TOKEN_KEY,'{}');
-    if (credentials.username != undefined) {
+    if (credentials.username !== undefined) {
       useCredentials(credentials);
     }
   }
@@ -71,12 +71,17 @@ angular.module('meanApp')
               storeUserCredentials({username:loginData.username, token: response.token});
               $rootScope.$broadcast('login:Successful');
               console.log('Login Successful');
+                  if(isAuthenticated){
+                    console.log("join dashboard");
+                    $location.path('/dashboard');
+                  }
+              // $location.path("/dashboard");
            },
            function(response){
               isAuthenticated = false;
 
               console.log('Authentication Failed');
-            
+              console.log('Invalid Credentials');
               // var message = '\
               //   <div class="ngdialog-message">\
               //   <div><h3>Login Unsuccessful</h3></div>' +
@@ -97,6 +102,8 @@ angular.module('meanApp')
         $resource(baseURL + "users/logout").get(function(response){
         });
         destroyUserCredentials();
+        console.log('Logged out');
+        $location.path('/');
     };
     
     authFac.register = function(registerData) {

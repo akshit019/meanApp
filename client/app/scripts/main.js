@@ -1,3 +1,5 @@
+'use strict';
+
 //setting up hamburger button
 $(document).ready(function() {
 
